@@ -11,9 +11,9 @@ from pygame.locals import *
     
    
 # Imagens Importadas
-Insper_background = pygame.image.load('8-Bit-Insper1.jpg')
+Insper_background = pygame.image.load('8-Bit-Insper1.png')
 icone = pygame.image.load('insperLogo.jpg')
-aluno = pygame.image.load('Aluno.png')
+aluno = pygame.image.load('alunocapitalistas.png')
 dollar = pygame.image.load('Dollars.png')
 FabLab = pygame.image.load('FabLab 8Bit.png')
 Fabulas = pygame.image.load('Calculo.png')
@@ -38,7 +38,7 @@ clock.tick(60)
 
 #Iniciar Display e set de Resolução RESOLUÇAO DEFINIDA EM 768x531 POR CAUSA DAS IMAGENS
 gameDisplay = pygame.display.init()
-screen = pygame.display.set_mode((1920,1080))
+screen = pygame.display.set_mode((800,600))
 pygame.display.toggle_fullscreen()
 
 #Shortcut pra Key
