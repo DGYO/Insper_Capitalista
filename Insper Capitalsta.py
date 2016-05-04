@@ -11,7 +11,7 @@ from pygame.locals import *
     
    
 # Imagens Importadas
-Insper_background = pygame.image.load('8-Bit-Insper1.png')
+Insper_background = pygame.image.load('8-Bit-Insper1.jpg')
 icone = pygame.image.load('insperLogo.jpg')
 aluno = pygame.image.load('alunocapitalistas.png')
 dollar = pygame.image.load('Dollars.png')
@@ -38,8 +38,8 @@ clock.tick(60)
 
 #Iniciar Display e set de Resolução RESOLUÇAO DEFINIDA EM 768x531 POR CAUSA DAS IMAGENS
 gameDisplay = pygame.display.init()
-screen = pygame.display.set_mode((800,600))
-pygame.display.toggle_fullscreen()
+screen = pygame.display.set_mode((1024,768))
+#pygame.display.toggle_fullscreen()
 
 #Shortcut pra Key
 key = pygame.key
@@ -50,9 +50,9 @@ def Mouse():
     return(X,Y)
 
 def dinheiro(count):
-    font = pygame.font.SysFont(None,100)
+    font = pygame.font.SysFont(None,50)
     text = font.render("Dollars:$"+str(count),True,(0,200,0))
-    screen.blit(text,(50,100))
+    screen.blit(text,(50,20))
 
 
 #Definir função menu
@@ -107,12 +107,12 @@ def game_loop():
     
     while not Crashed:
         screen.blit(Insper_background, [0, 0])
-        screen.blit(aluno,[0,200])
+        screen.blit(aluno,[-30,50])
         
         if count >= 200:
-            screen.blit(Fabulas,[1600,50])
+            screen.blit(Fabulas,[600,50])
             pygame.draw.rect(screen,(0,0,0),(1600,50,225,225),1)
-        pygame.draw.rect(screen, (0,0,0),(0,200,400,467),1)
+        pygame.draw.rect(screen, (0,0,0),(40,50,195,380),True)
         Xmouse,Ymouse = Mouse()
         dinheiro(count)
         for event in pygame.event.get():
@@ -128,8 +128,8 @@ def game_loop():
                 pygame.quit()
         
             #Botao Aluno
-            if 0+400 > Xmouse > 0:
-                if 200+460 > Ymouse > 200:
+            if 40+195 > Xmouse > 40:
+                if 50+380 > Ymouse > 50:
                     if pygame.mouse.get_pressed()[0]:
                         count += 1*Multi
             #Botao Livro 
@@ -146,6 +146,5 @@ def game_loop():
                 
                 
                 
-#Rodando o Jogo 
-Menu()
+#Rodando o Jogo
 game_loop() 
