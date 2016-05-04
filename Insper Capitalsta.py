@@ -111,7 +111,7 @@ def game_loop():
         
         if count >= 200:
             screen.blit(Fabulas,[600,50])
-            pygame.draw.rect(screen,(0,0,0),(1600,50,225,225),1)
+            pygame.draw.rect(screen,(0,0,0),(600,50,225,225),1)
         pygame.draw.rect(screen, (0,0,0),(40,50,195,380),True)
         Xmouse,Ymouse = Mouse()
         dinheiro(count)
@@ -132,9 +132,10 @@ def game_loop():
                 if 50+380 > Ymouse > 50:
                     if pygame.mouse.get_pressed()[0]:
                         count += 1*Multi
+                        break
             #Botao Livro 
             if count >= 200:
-                if 1600+225 > Xmouse > 1600:
+                if 600+225 > Xmouse > 600:
                     if 50+225 > Ymouse > 50:
                         if pygame.mouse.get_pressed()[0]:
                             Multi *= 2
