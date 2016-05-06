@@ -11,7 +11,7 @@ from pygame.locals import *
     
    
 # Imagens Importadas
-Insper_background = pygame.image.load('8-Bit-Insper1.jpg')
+Insper_background = pygame.image.load('teste.png')
 icone = pygame.image.load('insperLogo.jpg')
 aluno = pygame.image.load('alunocapitalistas.png')
 dollar = pygame.image.load('Dollars.png')
@@ -81,7 +81,7 @@ def Menu():
                 if event.type == pygame.QUIT:
                     pygame.quit()
         
-                 #Botao Start
+                #Botao Start
                 if 1361 > Xmouse > 463:
                     if 787 > Ymouse > 338:
                         if pygame.mouse.get_pressed()[0]:
@@ -110,13 +110,13 @@ def game_loop():
         screen.blit(Insper_background, [0, 0])
         screen.blit(aluno,[-30,50])
         
-        
+        #cafe
         if count >= 300 * inflacaocafe:
             screen.blit(Cafe,[600,300])
             pygame.draw.rect(screen,(0,0,0),(600,300,225,225),1)
         Xmouse,Ymouse = Mouse()
         dinheiro(count)
-        
+        #aluno e livro
         if count >= 200 * inflacaolivro:
             screen.blit(Fabulas,[600,50])
             pygame.draw.rect(screen,(0,0,0),(600,50,225,225),1)
