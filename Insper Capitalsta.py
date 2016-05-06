@@ -17,6 +17,7 @@ aluno = pygame.image.load('alunocapitalistas.png')
 dollar = pygame.image.load('Dollars.png')
 FabLab = pygame.image.load('FabLab 8Bit.png')
 Fabulas = pygame.image.load('Calculo.png')
+Cafe = pygame.image.load("cafe.jpg")
 
 #Botao Start
 Icone_start = pygame.image.load('New Piskel.png')
@@ -94,9 +95,9 @@ def Menu():
 #definir função Jogo       
 def game_loop():     
 
-
-
-       
+#variáveis
+    inflacaolivro = 1.0
+    inflacaocafe = 1.0   
     #Working Condition
     Crashed = False
     count = 0
@@ -109,12 +110,21 @@ def game_loop():
         screen.blit(Insper_background, [0, 0])
         screen.blit(aluno,[-30,50])
         
-        if count >= 200:
+        
+        if count >= 300 * inflacaocafe:
+            screen.blit(Cafe,[600,300])
+            pygame.draw.rect(screen,(0,0,0),(600,300,225,225),1)
+        Xmouse,Ymouse = Mouse()
+        dinheiro(count)
+        
+        if count >= 200 * inflacaolivro:
             screen.blit(Fabulas,[600,50])
             pygame.draw.rect(screen,(0,0,0),(600,50,225,225),1)
         pygame.draw.rect(screen, (0,0,0),(40,50,195,380),True)
         Xmouse,Ymouse = Mouse()
         dinheiro(count)
+        
+        
         for event in pygame.event.get():
             print(event)
             if key.get_pressed()[K_ESCAPE]:
@@ -134,12 +144,21 @@ def game_loop():
                         count += 1*Multi
                         break
             #Botao Livro 
-            if count >= 200:
+            if count >= 200 * inflacaolivro:
                 if 600+225 > Xmouse > 600:
                     if 50+225 > Ymouse > 50:
                         if pygame.mouse.get_pressed()[0]:
                             Multi *= 2
                             count -= 200
+                            inflacaolivro *= 1.5
+            #Botao Cafe
+            if count >= 300 * inflacaocafe:
+                if 600+225 > Xmouse > 600:
+                    if 300+225 > Ymouse > 300:
+                        if pygame.mouse.get_pressed()[0]:
+                            Multi *= 2
+                            count -= 300
+                            inflacaocafe *= 1.7        
         pygame.display.update()                
         
         
