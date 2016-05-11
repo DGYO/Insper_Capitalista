@@ -54,43 +54,10 @@ def dinheiro(count):
     font = pygame.font.SysFont(None,50)
     text = font.render("Dollars:$"+str(count),True,(0,200,0))
     screen.blit(text,(50,20))
-
-
-#Definir função menu
-def Menu():
-    Menu  = False
-    Xmouse,Ymouse = Mouse()
-    while not Menu:
-        
-        screen.blit(FabLab,[0, 0])
-        screen.blit(Icone_start2,[400,50])
-        pygame.draw.rect(screen,(0,0,0),(463,338,898,449),1)
-    
-        for event in pygame.event.get():
-                
-                if key.get_pressed()[K_ESCAPE]:
-                    Menu = True
-                    pygame.quit()
-                    
-                if key.get_pressed()[K_F11]:
-                    pygame.display.toggle_fullscreen()
-                    
-                if key.get_pressed()[K_1]:
-                    Menu = True
-                    
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-        
-                #Botao Start
-                if 1361 > Xmouse > 463:
-                    if 787 > Ymouse > 338:
-                        if pygame.mouse.get_pressed()[0]:
-                            Menu = True
                         
                         
                         
-        pygame.display.update()
- 
+       
  
 def Save(count,):
     SaveGameClick = shelve.open('InsperCap.Save 1')
