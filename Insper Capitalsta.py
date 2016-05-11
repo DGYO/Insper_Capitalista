@@ -57,9 +57,9 @@ def dinheiro(count):
  
 def Save(count,inflacaocafe,inflacaolivro):
     SaveGameClick = shelve.open('InsperCap.Save 1')
-    SaveGameClick[count] = Count
+    SaveGameClick[count] = count
     SaveGameClick[inflacaocafe] = inflacaocafe 
-    SaveGameClick[inflacaolivro] = infalcaolivro 
+    SaveGameClick[inflacaolivro] = inflacaolivro 
     SaveGameClick.close()
     
     
@@ -110,6 +110,9 @@ while not Crashed:
             
             elif event.key == K_F11:
                 pygame.display.toggle_fullscreen()
+            
+            elif event.key == K_s:
+                Save(count,inflacaocafe,inflacaolivro)                
                 
         elif event.type == QUIT:
             pygame.quit()
@@ -136,7 +139,9 @@ while not Crashed:
                         if pygame.mouse.get_pressed()[0]:
                             Multi *= 2
                             count -= 300
-                            inflacaocafe *= 1.7        
+                            inflacaocafe *= 1.7  
+                            
+            
     pygame.display.update()                
     clock.tick(60)
     
