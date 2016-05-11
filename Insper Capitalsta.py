@@ -54,10 +54,6 @@ def dinheiro(count):
     font = pygame.font.SysFont(None,50)
     text = font.render("Dollars:$"+str(count),True,(0,200,0))
     screen.blit(text,(50,20))
-                        
-                        
-                        
-       
  
 def Save(count,):
     SaveGameClick = shelve.open('InsperCap.Save 1')
