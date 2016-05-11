@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sat Apr 30 10:38:02 2016
 
-@author: francisco
-"""
 import pygame
 from pygame.locals import *
 import shelve
@@ -17,7 +13,9 @@ aluno = pygame.image.load('alunocapitalistas.png')
 dollar = pygame.image.load('Dollars.png')
 FabLab = pygame.image.load('FabLab 8Bit.png')
 Fabulas = pygame.image.load('Calculo.png')
+FabulasBW = pygame.image.load('CalculoBW.png')
 Cafe = pygame.image.load("cafe.jpg")
+CafeBW = pygame.image.load("cafeBW.jpg")
 
 #Botao Start
 Icone_start = pygame.image.load('New Piskel.png')
@@ -53,14 +51,37 @@ def Mouse():
 def dinheiro(count):
     font = pygame.font.SysFont(None,50)
     text = font.render("Dollars:$"+str(count),True,(0,200,0))
-    screen.blit(text,(50,20))
+    screen.blit(text,(40,165))
+
+def contagem_livros(livros):
+    font = pygame.font.SysFont(None,50)
+    text = font.render("livros:"+str(livros),True,(0,200,0))
+    screen.blit(text,(850,30))
  
-def Save(count,inflacaocafe,inflacaolivro):
+def Save(count,inflacaocafe,inflacaolivro,Multi):
     SaveGameClick = shelve.open('InsperCap.Save 1')
     SaveGameClick['count'] = count
     SaveGameClick['inflacaocafe'] = inflacaocafe 
     SaveGameClick['inflacaolivro'] = inflacaolivro 
+    SaveGameClick['Multi'] = Multi
+
     SaveGameClick.close()
+    
+def Load():
+    SaveGameClick = shelve.open('InsperCap.Save 1')
+    count = SaveGameClick['count']
+    inflacaocafe = SaveGameClick['inflacaocafe']
+    inflacaolivro = SaveGameClick['inflacaolivro']
+    Multi = SaveGameClick['Multi']
+    SaveGameClick.close()
+    return count,inflacaocafe,inflacaolivro,Multi
+    
+def Reset():
+    count = 0
+    inflacaolivro = 1.0
+    inflacaocafe = 1.0  
+    Multi = 1
+    return count,inflacaolivro,inflacaocafe,Multi
     
     
     
@@ -80,17 +101,21 @@ inflacaocafe = 1.0
 Crashed = False
 count = 0
 Multi = 1
+livros = 0
 
     
     
     
 while not Crashed:
     screen.blit(Insper_background, [0, 0])
-    screen.blit(aluno,[-30,50])
+    screen.blit(aluno,[-40,197])
     
     #cafe
     if count >= 300 * inflacaocafe:
         screen.blit(Cafe,[600,300])
+        pygame.draw.rect(screen,(0,0,0),(600,300,225,225),1)
+    elif count < 300 * inflacaocafe:
+        screen.blit(CafeBW,[600,300])
         pygame.draw.rect(screen,(0,0,0),(600,300,225,225),1)
     Xmouse,Ymouse = Mouse()
     dinheiro(count)
@@ -98,10 +123,13 @@ while not Crashed:
     if count >= 200 * inflacaolivro:
         screen.blit(Fabulas,[600,50])
         pygame.draw.rect(screen,(0,0,0),(600,50,225,225),1)
-    pygame.draw.rect(screen, (0,0,0),(40,50,195,380),True)
-    Xmouse,Ymouse = Mouse()
-    dinheiro(count)
     
+    elif count < 200 * inflacaolivro:
+        screen.blit(FabulasBW,[600,50])
+        pygame.draw.rect(screen,(0,0,0),(600,50,225,225),1)
+    pygame.draw.rect(screen, (0,0,0),(30,197,195,380),True)
+    dinheiro(count)
+    contagem_livros(livros)
     
     for event in pygame.event.get():
         print(event)
@@ -114,7 +142,17 @@ while not Crashed:
                 pygame.display.toggle_fullscreen()
             
             elif event.key == K_s:
-                Save(count,inflacaocafe,inflacaolivro)                
+                Save(count,inflacaocafe,inflacaolivro)    
+                
+                
+            elif event.key == K_s:
+                Save(count,inflacaocafe,inflacaolivro,Multi)  
+                
+            elif event.key == K_l:
+                count, inflacaocafe, inflacaolivro , Multi = Load()
+                
+            elif event.key == K_r:
+                count, inflacaocafe, inflacaolivro , Multi = Reset()
                 
         elif event.type == QUIT:
             pygame.quit()
@@ -122,15 +160,15 @@ while not Crashed:
         elif event.type == MOUSEBUTTONUP:
             Xmouse,Ymouse = event.pos
             #Botao Aluno
-            if 40+195 > Xmouse > 40:
-                if 50+380 > Ymouse > 50:       
+            if 30+195 > Xmouse > 30:
+                if 197+380 > Ymouse > 197:       
                     count += 1*Multi
                     
             #Botao Livro 
             if count >= 200 * inflacaolivro:
                 if 600+225 > Xmouse > 600:
                     if 50+225 > Ymouse > 50:
-                        if pygame.mouse.get_pressed()[0]:
+                            livros += 1
                             Multi *= 2
                             count -= 200
                             inflacaolivro *= 1.5
@@ -138,7 +176,7 @@ while not Crashed:
             if count >= 300 * inflacaocafe:
                 if 600+225 > Xmouse > 600:
                     if 300+225 > Ymouse > 300:
-                        if pygame.mouse.get_pressed()[0]:
+                        
                             Multi *= 2
                             count -= 300
                             inflacaocafe *= 1.7  
@@ -146,8 +184,6 @@ while not Crashed:
             
     pygame.display.update()                
     clock.tick(60)
-    
-
                 
                 
                 
