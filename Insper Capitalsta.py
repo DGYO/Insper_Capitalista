@@ -57,10 +57,12 @@ def dinheiro(count):
  
 def Save(count,inflacaocafe,inflacaolivro):
     SaveGameClick = shelve.open('InsperCap.Save 1')
-    SaveGameClick[count] = count
-    SaveGameClick[inflacaocafe] = inflacaocafe 
-    SaveGameClick[inflacaolivro] = inflacaolivro 
+    SaveGameClick['count'] = count
+    SaveGameClick['inflacaocafe'] = inflacaocafe 
+    SaveGameClick['inflacaolivro'] = inflacaolivro 
     SaveGameClick.close()
+    
+    
     
     
 
