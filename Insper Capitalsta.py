@@ -6,7 +6,7 @@ Created on Sat Apr 30 10:38:02 2016
 """
 import pygame
 from pygame.locals import *
-
+import shelve
 
     
    
@@ -35,7 +35,7 @@ pygame.display.set_icon(icone)
 
 #Fixando FPS
 clock = pygame.time.Clock()
-clock.tick(60)
+
 
 #Iniciar Display e set de Resolução RESOLUÇAO DEFINIDA EM 768x531 POR CAUSA DAS IMAGENS
 gameDisplay = pygame.display.init()
@@ -91,58 +91,69 @@ def Menu():
                         
         pygame.display.update()
  
+ 
+def Save(count,):
+    SaveGameClick = shelve.open('InsperCap.Save 1')
+    Count = SaveGameClick[count]
+    
 
-#definir função Jogo       
-def game_loop():     
+
+
+
+
+
+#definir função Jogo            
 
 #variáveis
-    inflacaolivro = 1.0
-    inflacaocafe = 1.0   
-    #Working Condition
-    Crashed = False
-    count = 0
-    Multi = 1
+inflacaolivro = 1.0
+inflacaocafe = 1.0   
+#Working Condition
+Crashed = False
+count = 0
+Multi = 1
+
     
     
     
+while not Crashed:
+    screen.blit(Insper_background, [0, 0])
+    screen.blit(aluno,[-30,50])
     
-    while not Crashed:
-        screen.blit(Insper_background, [0, 0])
-        screen.blit(aluno,[-30,50])
-        
-        #cafe
-        if count >= 300 * inflacaocafe:
-            screen.blit(Cafe,[600,300])
-            pygame.draw.rect(screen,(0,0,0),(600,300,225,225),1)
-        Xmouse,Ymouse = Mouse()
-        dinheiro(count)
-        #aluno e livro
-        if count >= 200 * inflacaolivro:
-            screen.blit(Fabulas,[600,50])
-            pygame.draw.rect(screen,(0,0,0),(600,50,225,225),1)
-        pygame.draw.rect(screen, (0,0,0),(40,50,195,380),True)
-        Xmouse,Ymouse = Mouse()
-        dinheiro(count)
-        
-        
-        for event in pygame.event.get():
-            print(event)
-            if key.get_pressed()[K_ESCAPE]:
+    #cafe
+    if count >= 300 * inflacaocafe:
+        screen.blit(Cafe,[600,300])
+        pygame.draw.rect(screen,(0,0,0),(600,300,225,225),1)
+    Xmouse,Ymouse = Mouse()
+    dinheiro(count)
+    #aluno e livro
+    if count >= 200 * inflacaolivro:
+        screen.blit(Fabulas,[600,50])
+        pygame.draw.rect(screen,(0,0,0),(600,50,225,225),1)
+    pygame.draw.rect(screen, (0,0,0),(40,50,195,380),True)
+    Xmouse,Ymouse = Mouse()
+    dinheiro(count)
+    
+    
+    for event in pygame.event.get():
+        print(event)
+        if event.type == KEYDOWN:
+            if event.key == K_ESCAPE:
                 Crashed = True
                 pygame.quit()
             
-            if key.get_pressed()[K_F11]:
+            elif event.key == K_F11:
                 pygame.display.toggle_fullscreen()
                 
-            if event.type == QUIT:
-                pygame.quit()
+        elif event.type == QUIT:
+            pygame.quit()
         
+        elif event.type == MOUSEBUTTONUP:
+            Xmouse,Ymouse = event.pos
             #Botao Aluno
             if 40+195 > Xmouse > 40:
-                if 50+380 > Ymouse > 50:
-                    if pygame.mouse.get_pressed()[0]:
-                        count += 1*Multi
-                        break
+                if 50+380 > Ymouse > 50:       
+                    count += 1*Multi
+                    
             #Botao Livro 
             if count >= 200 * inflacaolivro:
                 if 600+225 > Xmouse > 600:
@@ -159,12 +170,12 @@ def game_loop():
                             Multi *= 2
                             count -= 300
                             inflacaocafe *= 1.7        
-        pygame.display.update()                
-        
-        
+    pygame.display.update()                
+    clock.tick(60)
+    
 
                 
                 
                 
-#Rodando o Jogo
-game_loop() 
+
+
