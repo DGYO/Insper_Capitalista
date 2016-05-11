@@ -55,9 +55,13 @@ def dinheiro(count):
     text = font.render("Dollars:$"+str(count),True,(0,200,0))
     screen.blit(text,(50,20))
  
-def Save(count,):
+def Save(count,inflacaocafe,inflacaolivro):
     SaveGameClick = shelve.open('InsperCap.Save 1')
-    Count = SaveGameClick[count]
+    SaveGameClick[count] = Count
+    SaveGameClick[inflacaocafe] = inflacaocafe 
+    SaveGameClick[inflacaolivro] = infalcaolivro 
+    SaveGameClick.close()
+    
     
 
 
