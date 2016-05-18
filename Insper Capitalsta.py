@@ -15,6 +15,7 @@ alunoR = pygame.image.load('alunocapitalistasR.png')
 dollar = pygame.image.load('Dollars.png')
 FabLab = pygame.image.load('FabLab 8Bit.png')
 Fabulas = pygame.image.load('Calculo.png')
+calculosemdinheiro = pygame.image.load('calculosemdinheiro.png')
 FabulasBW = pygame.image.load('CalculoBW.png')
 Cafe = pygame.image.load("cafe.jpg")
 imagembotao = pygame.image.load("botao.png")
@@ -116,11 +117,9 @@ MultiT1 = 1
 
     
     
-    
 while not Crashed:
     screen.blit(Insper_background, [0, 0])
     screen.blit(aluno,[-40,197])
-    screen.blit(imagembotao,[600,0])
     screen.blit(imagembotao,[600,75])
     screen.blit(imagembotao,[600,150])
     screen.blit(imagembotao,[600,225])
@@ -134,28 +133,23 @@ while not Crashed:
 
     #aluno e livro
     if count >= 200 * inflacaolivro:
-        #screen.blit(Fabulas,[600,50])
-        #screen.blit(imagembotao,[600,0])
-        #pygame.draw.rect(screen,(0,0,0),(600,0,500,75),1)
-
-    #   elif count < 200 * inflacaolivro:
-        #screen.blit(FabulasBW,[600,50])
-        #screen.blit(botaosemdinheiro,[600,0])
-        pygame.draw.rect(screen,(0,0,0),(600,0,500,75),1)
-    #pygame.draw.rect(screen, (255,255,255),(30,197,195,380),True) 
+        screen.blit(imagembotao,[600,0])
+        screen.blit(Fabulas,[610,10])
+    elif count < 200 * inflacaolivro:
+        screen.blit(botaosemdinheiro,[600,0])
+        screen.blit(calculosemdinheiro,[610,10])
+        
     dinheiro(count)
     contagem_livros(livros)
 
     #cafe
     if count >= 300 * inflacaocafe:
-        screen.blit(Cafe,[600,50])
         pygame.draw.rect(screen,(0,0,0),(600,300,225,225),1)
     
     elif count < 300 * inflacaocafe:
-        #screen.blit(Cafe,[600,300])
-        screen.blit(botaosemdinheiro,[600,75])
-        #screen.blit(imagembotao,[600,75])
-        pygame.draw.rect(screen,(0,0,0),(600,300,225,225),1)
+        screen.blit(Cafe,[600,300])
+        #screen.blit(botaosemdinheiro,[600,75])
+       
     Xmouse,Ymouse = Mouse()
     dinheiro(count)
     contagem_cafes(cafes)
