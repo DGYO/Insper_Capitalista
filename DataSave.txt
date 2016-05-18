@@ -1,0 +1,9 @@
+(lp0
+I6
+aF1.7
+aF1.5
+aI2
+aI1
+aI2
+aI1
+a.

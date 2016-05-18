@@ -2,7 +2,7 @@
 
 import pygame
 from pygame.locals import *
-import shelve
+import pickle
 #import image 
 #import time
     
@@ -62,30 +62,20 @@ def contagem_livros(livros):
 
 def contagem_cafes(cafes):
     font = pygame.font.SysFont(None,50)
-    text = font.render("livros:"+str(livros),True,(0,200,0))
+    text = font.render("Cafes:"+str(cafes),True,(0,200,0))
     screen.blit(text,(850,70))
  
 def Save(count,inflacaocafe,inflacaolivro,Multi,livros,MultiT1,cafes):
-    SaveGameClick = shelve.open('InsperCap.Save 1')
-    SaveGameClick['count'] = count
-    SaveGameClick['inflacaocafe'] = inflacaocafe 
-    SaveGameClick['inflacaolivro'] = inflacaolivro 
-    SaveGameClick['Multi'] = Multi
-    SaveGameClick['livros'] = livros
-    SaveGameClick['MultiT1'] = MultiT1
-    SaveGameClick['cafes'] = cafes
-    SaveGameClick.close()
-    
+    listData = [count,inflacaocafe,inflacaolivro,Multi,livros,MultiT1,cafes]
+    outFile = open('DataSave.txt','wb')
+    pickle.dump(listData, outFile)
+    outFile.close()
+
 def Load():
-    SaveGameClick = shelve.open('InsperCap.Save 1')
-    count = SaveGameClick['count']
-    inflacaocafe = SaveGameClick['inflacaocafe']
-    inflacaolivro = SaveGameClick['inflacaolivro']
-    livros = SaveGameClick['livros']
-    MultiT1 = SaveGameClick['MultiT1']
-    cafes = SaveGameClick['cafes']
-    SaveGameClick.close()
-    return count,inflacaolivro,inflacaocafe,Multi,MultiT1,cafes,livros
+    inFile = open('DataSave.txt','rb')
+    LoadList = pickle.load(inFile)
+    inFile.close()
+    return LoadList
     
 def Reset():
     count = 0
@@ -159,14 +149,15 @@ while not Crashed:
             
             elif event.key == K_h:
                 pygame.display.toggle_fullscreen()
+
             elif event.key == K_s:
-                Save(count,inflacaocafe,inflacaolivro,Multi,livros.MultiT1,cafes)  
+                Save(count,inflacaocafe,inflacaolivro,Multi,livros,MultiT1,cafes)  
                 
             elif event.key == K_l:
-                count,inflacaocafe,inflacaolivro,Multi,livros.MultiT1,cafes = Load()
+                count,inflacaocafe,inflacaolivro,Multi,livros,MultiT1,cafes = Load()
                 
             elif event.key == K_r:
-                count,inflacaocafe,inflacaolivro,Multi,livros.MultiT1,cafes = Reset()
+                count,inflacaocafe,inflacaolivro,Multi,MultiT1,cafes,livros = Reset()
                 
         elif event.type == QUIT:
             pygame.quit()
