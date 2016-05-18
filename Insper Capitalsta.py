@@ -17,8 +17,8 @@ FabLab = pygame.image.load('FabLab 8Bit.png')
 Fabulas = pygame.image.load('Calculo.png')
 FabulasBW = pygame.image.load('CalculoBW.png')
 Cafe = pygame.image.load("cafe.jpg")
-CafeBW = pygame.image.load("cafeBW.jpg")
-
+imagembotao = pygame.image.load("botao.png")
+imagembotaoapertado = pygame.image.load("botaoapertado.png")
 #Botao Start
 Icone_start = pygame.image.load('New Piskel.png')
 Icone_start2 = pygame.image.load('New Piskel(1).png')
@@ -117,28 +117,45 @@ MultiT1 = 1
 while not Crashed:
     screen.blit(Insper_background, [0, 0])
     screen.blit(aluno,[-40,197])
-    
+    screen.blit(imagembotao,[600,0])
+    screen.blit(imagembotao,[600,75])
+    screen.blit(imagembotao,[600,150])
+    screen.blit(imagembotao,[600,225])
+    screen.blit(imagembotao,[600,300])
+    screen.blit(imagembotao,[600,375])
+    screen.blit(imagembotao,[600,450])
+    screen.blit(imagembotao,[600,525])
+    screen.blit(imagembotao,[600,600])
+    screen.blit(imagembotao,[600,675])
+
+
+    #aluno e livro
+    if count >= 200 * inflacaolivro:
+        #screen.blit(Fabulas,[600,50])
+        #screen.blit(imagembotao,[600,0])
+        #pygame.draw.rect(screen,(0,0,0),(600,0,500,75),1)
+
+    #elif count < 200 * inflacaolivro:
+        #screen.blit(FabulasBW,[600,50])
+        #screen.blit(imagembotao,[600,0])
+        pygame.draw.rect(screen,(0,0,0),(600,0,500,75),1)
+    #pygame.draw.rect(screen, (255,255,255),(30,197,195,380),True) 
+    dinheiro(count)
+    contagem_livros(livros)
+
     #cafe
     if count >= 300 * inflacaocafe:
-        screen.blit(Cafe,[600,300])
+        screen.blit(Cafe,[600,50])
         pygame.draw.rect(screen,(0,0,0),(600,300,225,225),1)
+    
     elif count < 300 * inflacaocafe:
-        screen.blit(CafeBW,[600,300])
+        screen.blit(Cafe,[600,300])
+        #screen.blit(imagembotao,[600,75])
         pygame.draw.rect(screen,(0,0,0),(600,300,225,225),1)
     Xmouse,Ymouse = Mouse()
     dinheiro(count)
     contagem_cafes(cafes)
-    #aluno e livro
-    if count >= 200 * inflacaolivro:
-        screen.blit(Fabulas,[600,50])
-        pygame.draw.rect(screen,(0,0,0),(600,50,225,225),1)
     
-    elif count < 200 * inflacaolivro:
-        screen.blit(FabulasBW,[600,50])
-        pygame.draw.rect(screen,(0,0,0),(600,50,225,225),1)
-    pygame.draw.rect(screen, (255,255,255),(30,197,195,380),True) #aluno
-    dinheiro(count)
-    contagem_livros(livros)
     
     for event in pygame.event.get():
         print(event)
@@ -173,6 +190,10 @@ while not Crashed:
                 if 197+380 > Ymouse > 197:
                     aluno =  alunoR
                     screen.blit(aluno,[-40,197])
+            if 600+500 > Xmouse > 600:
+                if 0+75 > Ymouse > 0:
+                    imagembotao = imagembotaoapertado
+                    screen.blit(imagembotao,[600,0])
 
         elif event.type == MOUSEBUTTONUP:
             Xmouse,Ymouse = event.pos
@@ -180,6 +201,10 @@ while not Crashed:
                 if 197+380 > Ymouse > 197:
                     aluno = pygame.image.load('alunocapitalistas.png')
                     screen.blit(aluno,[-40,197])
+            if 600+500 > Xmouse > 600:
+                if 0+75 > Ymouse > 0:
+                    imagembotao = pygame.image.load("botao.png")   
+                    screen.blit(imagembotao,[600,0]) 
 
 
 
@@ -193,12 +218,13 @@ while not Crashed:
                     
             #Botao Livro 
             if count >= 200 * inflacaolivro:
-                if 600+225 > Xmouse > 600:
-                    if 50+225 > Ymouse > 50:
+                if 600+500 > Xmouse > 600:
+                    if 0+75 > Ymouse > 0:
                             livros += 1
                             Multi *= 2
                             count -= 200
                             inflacaolivro *= 1.5
+                            
             #Botao Cafe
             if count >= 300 * inflacaocafe:
                 if 600+225 > Xmouse > 600:
@@ -207,7 +233,7 @@ while not Crashed:
                         MultiT1 *= 2
                         count -= 300
                         inflacaocafe *= 1.7  
-
+                        
 
 
 
