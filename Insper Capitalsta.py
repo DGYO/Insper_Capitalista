@@ -15,9 +15,10 @@ alunoR = pygame.image.load('alunocapitalistasR.png')
 dollar = pygame.image.load('Dollars.png')
 FabLab = pygame.image.load('FabLab 8Bit.png')
 Fabulas = pygame.image.load('Calculo.png')
-calculosemdinheiro = pygame.image.load('Calculosemdinheiro.png')
+calculosemdinheiro = pygame.image.load('calculosemdinheiro.png')
 FabulasBW = pygame.image.load('CalculoBW.png')
-Cafe = pygame.image.load("cafe.jpg")
+Cafe = pygame.image.load("coffe.png")
+cafesemdinheiro = pygame.image.load("cafesemdinheiro.png")
 imagembotao = pygame.image.load("botao.png")
 imagembotaoapertado = pygame.image.load("botaoapertado.png")
 botaosemdinheiro = pygame.image.load("botaosemdinheiro.png")
@@ -120,7 +121,7 @@ MultiT1 = 1
 while not Crashed:
     screen.blit(Insper_background, [0, 0])
     screen.blit(aluno,[-40,197])
-    screen.blit(imagembotao,[600,75])
+    
     screen.blit(imagembotao,[600,150])
     screen.blit(imagembotao,[600,225])
     screen.blit(imagembotao,[600,300])
@@ -144,11 +145,13 @@ while not Crashed:
 
     #cafe
     if count >= 300 * inflacaocafe:
-        pygame.draw.rect(screen,(0,0,0),(600,300,225,225),1)
-    
+        screen.blit(imagembotao,[600,75])
+        screen.blit(Cafe,[610,85])
+
     elif count < 300 * inflacaocafe:
-        screen.blit(Cafe,[600,300])
-        #screen.blit(botaosemdinheiro,[600,75])
+        screen.blit(botaosemdinheiro,[600,75])
+        screen.blit(cafesemdinheiro,[610,85])
+        
        
     Xmouse,Ymouse = Mouse()
     dinheiro(count)
