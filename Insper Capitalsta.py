@@ -3,13 +3,15 @@
 import pygame
 from pygame.locals import *
 import shelve
-
+#import image 
+#import time
     
    
 # Imagens Importadas
 Insper_background = pygame.image.load('teste.png')
 icone = pygame.image.load('insperLogo.jpg')
 aluno = pygame.image.load('alunocapitalistas.png')
+alunoR = pygame.image.load('alunocapitalistasR.png')
 dollar = pygame.image.load('Dollars.png')
 FabLab = pygame.image.load('FabLab 8Bit.png')
 Fabulas = pygame.image.load('Calculo.png')
@@ -38,7 +40,7 @@ clock = pygame.time.Clock()
 #Iniciar Display e set de Resolução RESOLUÇAO DEFINIDA EM 768x531 POR CAUSA DAS IMAGENS
 gameDisplay = pygame.display.init()
 screen = pygame.display.set_mode((1024,768))
-#pygame.display.toggle_fullscreen()
+
 
 #Shortcut pra Key
 key = pygame.key
@@ -57,14 +59,21 @@ def contagem_livros(livros):
     font = pygame.font.SysFont(None,50)
     text = font.render("livros:"+str(livros),True,(0,200,0))
     screen.blit(text,(850,30))
+
+def contagem_cafes(cafes):
+    font = pygame.font.SysFont(None,50)
+    text = font.render("livros:"+str(livros),True,(0,200,0))
+    screen.blit(text,(850,70))
  
-def Save(count,inflacaocafe,inflacaolivro,Multi):
+def Save(count,inflacaocafe,inflacaolivro,Multi,livros,MultiT1,cafes):
     SaveGameClick = shelve.open('InsperCap.Save 1')
     SaveGameClick['count'] = count
     SaveGameClick['inflacaocafe'] = inflacaocafe 
     SaveGameClick['inflacaolivro'] = inflacaolivro 
     SaveGameClick['Multi'] = Multi
-
+    SaveGameClick['livros'] = livros
+    SaveGameClick['MultiT1'] = MultiT1
+    SaveGameClick['cafes'] = cafes
     SaveGameClick.close()
     
 def Load():
@@ -72,16 +81,21 @@ def Load():
     count = SaveGameClick['count']
     inflacaocafe = SaveGameClick['inflacaocafe']
     inflacaolivro = SaveGameClick['inflacaolivro']
-    Multi = SaveGameClick['Multi']
+    livros = SaveGameClick['livros']
+    MultiT1 = SaveGameClick['MultiT1']
+    cafes = SaveGameClick['cafes']
     SaveGameClick.close()
-    return count,inflacaocafe,inflacaolivro,Multi
+    return count,inflacaolivro,inflacaocafe,Multi,MultiT1,cafes,livros
     
 def Reset():
     count = 0
     inflacaolivro = 1.0
     inflacaocafe = 1.0  
     Multi = 1
-    return count,inflacaolivro,inflacaocafe,Multi
+    MultiT1 = 1
+    cafes = 0
+    livros = 0
+    return count,inflacaolivro,inflacaocafe,Multi,MultiT1,cafes,livros
     
     
     
@@ -97,11 +111,15 @@ def Reset():
 #variáveis
 inflacaolivro = 1.0
 inflacaocafe = 1.0   
+DINHEIROTEMPO = USEREVENT + 1 
+pygame.time.set_timer(DINHEIROTEMPO, 1000)
 #Working Condition
 Crashed = False
-count = 0
+count = 0 
 Multi = 1
 livros = 0
+cafes = 0
+MultiT1 = 1
 
     
     
@@ -119,6 +137,7 @@ while not Crashed:
         pygame.draw.rect(screen,(0,0,0),(600,300,225,225),1)
     Xmouse,Ymouse = Mouse()
     dinheiro(count)
+    contagem_cafes(cafes)
     #aluno e livro
     if count >= 200 * inflacaolivro:
         screen.blit(Fabulas,[600,50])
@@ -127,7 +146,7 @@ while not Crashed:
     elif count < 200 * inflacaolivro:
         screen.blit(FabulasBW,[600,50])
         pygame.draw.rect(screen,(0,0,0),(600,50,225,225),1)
-    pygame.draw.rect(screen, (0,0,0),(30,197,195,380),True)
+    pygame.draw.rect(screen, (255,255,255),(30,197,195,380),True) #aluno
     dinheiro(count)
     contagem_livros(livros)
     
@@ -138,27 +157,44 @@ while not Crashed:
                 Crashed = True
                 pygame.quit()
             
-            elif event.key == K_F11:
+            elif event.key == K_h:
                 pygame.display.toggle_fullscreen()
-            
             elif event.key == K_s:
-                Save(count,inflacaocafe,inflacaolivro)    
-                
-                
-            elif event.key == K_s:
-                Save(count,inflacaocafe,inflacaolivro,Multi)  
+                Save(count,inflacaocafe,inflacaolivro,Multi,livros.MultiT1,cafes)  
                 
             elif event.key == K_l:
-                count, inflacaocafe, inflacaolivro , Multi = Load()
+                count,inflacaocafe,inflacaolivro,Multi,livros.MultiT1,cafes = Load()
                 
             elif event.key == K_r:
-                count, inflacaocafe, inflacaolivro , Multi = Reset()
+                count,inflacaocafe,inflacaolivro,Multi,livros.MultiT1,cafes = Reset()
                 
         elif event.type == QUIT:
             pygame.quit()
+
+        elif event.type == DINHEIROTEMPO:
+            if cafes == 1:
+                count += 1 
+            elif cafes > 1:
+                count += 1 + MultiT1    
         
+        elif event.type == MOUSEBUTTONDOWN:
+            if 30+195 > Xmouse > 30:
+                if 197+380 > Ymouse > 197:
+                    aluno =  alunoR
+                    screen.blit(aluno,[-40,197])
+
         elif event.type == MOUSEBUTTONUP:
             Xmouse,Ymouse = event.pos
+            if 30+195 > Xmouse > 30:
+                if 197+380 > Ymouse > 197:
+                    aluno = pygame.image.load('alunocapitalistas.png')
+                    screen.blit(aluno,[-40,197])
+
+
+
+        
+            
+
             #Botao Aluno
             if 30+195 > Xmouse > 30:
                 if 197+380 > Ymouse > 197:       
@@ -176,16 +212,17 @@ while not Crashed:
             if count >= 300 * inflacaocafe:
                 if 600+225 > Xmouse > 600:
                     if 300+225 > Ymouse > 300:
-                        
-                            Multi *= 2
-                            count -= 300
-                            inflacaocafe *= 1.7  
+                        cafes += 1
+                        MultiT1 *= 2
+                        count -= 300
+                        inflacaocafe *= 1.7  
+
+
+
+
+
+
                             
             
     pygame.display.update()                
     clock.tick(60)
-                
-                
-                
-
-
