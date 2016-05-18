@@ -19,6 +19,7 @@ FabulasBW = pygame.image.load('CalculoBW.png')
 Cafe = pygame.image.load("cafe.jpg")
 imagembotao = pygame.image.load("botao.png")
 imagembotaoapertado = pygame.image.load("botaoapertado.png")
+botaosemdinheiro = pygame.image.load("botaosemdinheiro.png")
 #Botao Start
 Icone_start = pygame.image.load('New Piskel.png')
 Icone_start2 = pygame.image.load('New Piskel(1).png')
@@ -26,6 +27,7 @@ Icone_start2 = pygame.image.load('New Piskel(1).png')
 
 #iniciando o pygame
 pygame.init()
+pygame.font.init()
 
 green = (0,0,0)
 
@@ -51,17 +53,18 @@ def Mouse():
     return(X,Y)
 
 def dinheiro(count):
-    font = pygame.font.SysFont(None,50)
+    font = pygame.font.SysFont("heineken",50)
+    font.set_bold(True)
     text = font.render("Dollars:$"+str(count),True,(0,200,0))
     screen.blit(text,(40,165))
 
 def contagem_livros(livros):
-    font = pygame.font.SysFont(None,50)
+    font = pygame.font.SysFont("heineken",50)
     text = font.render("livros:"+str(livros),True,(0,200,0))
     screen.blit(text,(850,30))
 
 def contagem_cafes(cafes):
-    font = pygame.font.SysFont(None,50)
+    font = pygame.font.SysFont("    heineken",50)
     text = font.render("Cafes:"+str(cafes),True,(0,200,0))
     screen.blit(text,(850,70))
  
@@ -135,9 +138,9 @@ while not Crashed:
         #screen.blit(imagembotao,[600,0])
         #pygame.draw.rect(screen,(0,0,0),(600,0,500,75),1)
 
-    #elif count < 200 * inflacaolivro:
+    #   elif count < 200 * inflacaolivro:
         #screen.blit(FabulasBW,[600,50])
-        #screen.blit(imagembotao,[600,0])
+        #screen.blit(botaosemdinheiro,[600,0])
         pygame.draw.rect(screen,(0,0,0),(600,0,500,75),1)
     #pygame.draw.rect(screen, (255,255,255),(30,197,195,380),True) 
     dinheiro(count)
@@ -149,7 +152,8 @@ while not Crashed:
         pygame.draw.rect(screen,(0,0,0),(600,300,225,225),1)
     
     elif count < 300 * inflacaocafe:
-        screen.blit(Cafe,[600,300])
+        #screen.blit(Cafe,[600,300])
+        screen.blit(botaosemdinheiro,[600,75])
         #screen.blit(imagembotao,[600,75])
         pygame.draw.rect(screen,(0,0,0),(600,300,225,225),1)
     Xmouse,Ymouse = Mouse()
