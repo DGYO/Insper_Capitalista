@@ -13,6 +13,7 @@ import pickle
    
 # Imagens Importadas
 Insper_background = pygame.image.load('teste.png')
+Insper_background2 = pygame.image.load('teste2.png')
 icone = pygame.image.load('insperLogo.jpg')
 aluno = pygame.image.load('alunocapitalistas.png')
 alunoR = pygame.image.load('alunocapitalistasR.png')
@@ -98,7 +99,7 @@ def Mouse():
     return(X,Y)
 
 def dinheiro(count):
-    screen.blit(retangulo,(0,145))
+    screen.blit(retangulo,(0,30))
     font = pygame.font.SysFont("Back to 1982" ,25)
     if count < 1000:    
         text = font.render("Dollars:$"+str('{0:,.1f}'.format(count)),True,(0,200,0))
@@ -110,7 +111,7 @@ def dinheiro(count):
         text = font.render("Dollars:$"+str('{0:,.2f}'.format(count/1000000000))+"Bi",True,(0,200,0))
     elif 1000000000000 < count < 1000000000000000:
         text = font.render("Dollars:$"+str('{0:,.2f}'.format(count/1000000000000))+"T",True,(0,200,0))
-    screen.blit(text,(10,160))
+    screen.blit(text,(10,50))
 
 def contagem_livros(livros):
     font = pygame.font.SysFont("Back to 1982",20)
@@ -247,9 +248,9 @@ Inspers = 0
     
     
 while not Crashed:
-    screen.blit(Insper_background, [0, 0])
+    screen.blit(Insper_background2, [0, 0])
     screen.blit(aluno,[-5,101])
-
+    screen.blit(Insper_background, [0, 0])
       
     #livro
     if count >= 200 * inflacaolivro:
