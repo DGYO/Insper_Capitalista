@@ -42,6 +42,7 @@ atleticasemdinheiro = pygame.image.load("atleticasemdinheiro.png")
 imageminsper = pygame.image.load("insperLogo.png")
 insperLogosemdinheiro = pygame.image.load("insperLogosemdinheiro.png")
 retangulo = pygame.image.load("rect.png")
+oficina = pygame.image.load("oficina.png")
 
 #Botoes loja
 imagembotao1 = pygame.image.load("botao.png")
@@ -86,8 +87,8 @@ clock = pygame.time.Clock()
 
 #Iniciar Display e set de Resolução RESOLUÇAO DEFINIDA EM 768x531 POR CAUSA DAS IMAGENS
 gameDisplay = pygame.display.init()
-#screen = pygame.display.set_mode((1024,768),pygame.FULLSCREEN)
-screen = pygame.display.set_mode((1024,768))
+screen = pygame.display.set_mode((1024,768),pygame.FULLSCREEN)
+#screen = pygame.display.set_mode((1024,768))
 
 
 #Shortcut pra Key
@@ -245,7 +246,9 @@ profs = 0
 entidades = 0
 FabLabs = 0
 Inspers = 0
-    
+ 
+#animação
+screen.blit(oficina,[-130,430])   
     
 while not Crashed:
     screen.blit(Insper_background2, [0, 0])
@@ -496,6 +499,9 @@ while not Crashed:
                 if 197+380 > Ymouse > 197:       
                     count += 0.1 * Multi
                     
+
+
+
               
                         
 
