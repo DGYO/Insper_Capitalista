@@ -85,7 +85,8 @@ clock = pygame.time.Clock()
 
 #Iniciar Display e set de Resolução RESOLUÇAO DEFINIDA EM 768x531 POR CAUSA DAS IMAGENS
 gameDisplay = pygame.display.init()
-screen = pygame.display.set_mode((1024,768),pygame.FULLSCREEN)
+#screen = pygame.display.set_mode((1024,768),pygame.FULLSCREEN)
+screen = pygame.display.set_mode((1024,768))
 
 
 #Shortcut pra Key
@@ -247,7 +248,7 @@ Inspers = 0
     
 while not Crashed:
     screen.blit(Insper_background, [0, 0])
-    screen.blit(aluno,[-40,197])
+    screen.blit(aluno,[-5,101])
 
       
     #livro
@@ -368,7 +369,7 @@ while not Crashed:
             if 30+195 > Xmouse > 30:
                 if 197+380 > Ymouse > 197:
                     aluno =  alunoR
-                    screen.blit(aluno,[-40,197])
+                    screen.blit(aluno,[-5,101])
             #livro
             if 600+500 > Xmouse > 600:
                 if 0+75 > Ymouse > 0:
@@ -427,7 +428,7 @@ while not Crashed:
             if 30+195 > Xmouse > 30:
                 if 197+380 > Ymouse > 197:
                     aluno = pygame.image.load('alunocapitalistas.png')
-                    screen.blit(aluno,[-40,197])
+                    screen.blit(aluno,[-5,101])
             if 600+500 > Xmouse > 600:
                 if 0+75 > Ymouse > 0:
                     if count >= 200 * inflacaolivro:
