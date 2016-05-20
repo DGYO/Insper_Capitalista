@@ -23,8 +23,6 @@ calculosemdinheiro = pygame.image.load('calculosemdinheiro.png')
 FabulasBW = pygame.image.load('CalculoBW.png')
 Cafe = pygame.image.load("coffe.png")
 cafesemdinheiro = pygame.image.load("cafesemdinheiro.png")
-imagembotao = pygame.image.load("botao.png")
-imagembotaoapertado = pygame.image.load("botaoapertado.png")
 botaosemdinheiro = pygame.image.load("botaosemdinheiro.png")
 imagemacai = pygame.image.load("acai.png")
 acaisemdinheiro = pygame.image.load("acaisemdinheiro.png")
@@ -42,6 +40,30 @@ imgaematletica = pygame.image.load("atletica.png")
 atleticasemdinheiro = pygame.image.load("atleticasemdinheiro.png")
 imageminsper = pygame.image.load("insperLogo.png")
 insperLogosemdinheiro = pygame.image.load("insperLogosemdinheiro.png")
+retangulo = pygame.image.load("rect.png")
+
+#Botoes loja
+imagembotao1 = pygame.image.load("botao.png")
+imagembotao2 = pygame.image.load("botao.png")
+imagembotao3 = pygame.image.load("botao.png")
+imagembotao4 = pygame.image.load("botao.png")
+imagembotao5 = pygame.image.load("botao.png")
+imagembotao6 = pygame.image.load("botao.png")
+imagembotao7 = pygame.image.load("botao.png")
+imagembotao8 = pygame.image.load("botao.png")
+imagembotao9 = pygame.image.load("botao.png")
+imagembotao10 = pygame.image.load("botao.png")
+imagembotaoapertado1 = pygame.image.load("botaoapertado.png")
+imagembotaoapertado2 = pygame.image.load("botaoapertado.png")
+imagembotaoapertado3 = pygame.image.load("botaoapertado.png")
+imagembotaoapertado4 = pygame.image.load("botaoapertado.png")
+imagembotaoapertado5 = pygame.image.load("botaoapertado.png")
+imagembotaoapertado6 = pygame.image.load("botaoapertado.png")
+imagembotaoapertado7 = pygame.image.load("botaoapertado.png")
+imagembotaoapertado8 = pygame.image.load("botaoapertado.png")
+imagembotaoapertado9 = pygame.image.load("botaoapertado.png")
+imagembotaoapertado10 = pygame.image.load("botaoapertado.png")
+
 #Botao Start
 Icone_start = pygame.image.load('New Piskel.png')
 Icone_start2 = pygame.image.load('New Piskel(1).png')
@@ -63,7 +85,7 @@ clock = pygame.time.Clock()
 
 #Iniciar Display e set de Resolução RESOLUÇAO DEFINIDA EM 768x531 POR CAUSA DAS IMAGENS
 gameDisplay = pygame.display.init()
-screen = pygame.display.set_mode((1024,768))
+screen = pygame.display.set_mode((1024,768),pygame.FULLSCREEN)
 
 
 #Shortcut pra Key
@@ -75,26 +97,70 @@ def Mouse():
     return(X,Y)
 
 def dinheiro(count):
-    font = pygame.font.SysFont("heineken",50)
-    font.set_bold(True)
-    text = font.render("Dollars:$"+str(count),True,(0,200,0))
-    screen.blit(text,(40,165))
+    screen.blit(retangulo,(0,145))
+    font = pygame.font.SysFont("Back to 1982" ,25)
+    if count < 1000:    
+        text = font.render("Dollars:$"+str('{0:,.1f}'.format(count)),True,(0,200,0))
+    elif 1000 < count < 1000000:
+        text = font.render("Dollars:$"+str('{0:,.2f}'.format(count/1000))+"K",True,(0,200,0))
+    elif 1000000 < count < 1000000000:
+        text = font.render("Dollars:$"+str('{0:,.2f}'.format(count/1000000))+"M",True,(0,200,0))
+    elif 1000000000 < count < 1000000000000:
+        text = font.render("Dollars:$"+str('{0:,.2f}'.format(count/1000000000))+"Bi",True,(0,200,0))
+    elif 1000000000000 < count < 1000000000000000:
+        text = font.render("Dollars:$"+str('{0:,.2f}'.format(count/1000000000000))+"T",True,(0,200,0))
+    screen.blit(text,(10,160))
 
 def contagem_livros(livros):
-    font = pygame.font.SysFont("heineken",50)
-    text = font.render("livros:"+str(livros),True,(0,200,0))
-    screen.blit(text,(850,20))
+    font = pygame.font.SysFont("Back to 1982",20)
+    text = font.render("livros:"+str(livros),True,(0,0,0))
+    screen.blit(text,(850,25))
 
 def contagem_cafes(cafes):
-    font = pygame.font.SysFont("    heineken",50)
-    text = font.render("Cafes:"+str(cafes),True,(0,200,0))
-    screen.blit(text,(850,90))
+    font = pygame.font.SysFont("Back to 1982",20)
+    text = font.render("Cafes:"+str(cafes),True,(0,0,0))
+    screen.blit(text,(850,100))
 
-def contagem_acai(acais):
-    font = pygame.font.SysFont("    heineken",50)
-    text = font.render("Acais:"+str(acais),True,(0,200,0))
-    screen.blit(text,(850,165))
- 
+def contagem_acais(acais):
+    font = pygame.font.SysFont("Back to 1982",20)
+    text = font.render("Acais:"+str(acais),True,(0,0,0))
+    screen.blit(text,(850,175))
+
+def contagem_comps(comps):
+    font = pygame.font.SysFont("Back to 1982",13)
+    text = font.render("Computadores:"+str(comps),True,(0,0,0))
+    screen.blit(text,(850,250))
+
+def contagem_ninjas(ninjas):
+    font = pygame.font.SysFont("Back to 1982",20)
+    text = font.render("Ninjas:"+str(ninjas),True,(0,0,0))
+    screen.blit(text,(850,325))
+
+def contagem_carros(carros):
+    font = pygame.font.SysFont("Back to 1982",20)
+    text = font.render("Carros:"+str(carros),True,(0,0,0))
+    screen.blit(text,(850,400))
+
+def contagem_profs(profs):
+    font = pygame.font.SysFont("Back to 1982",14)
+    text = font.render("Professores:"+str(profs),True,(0,0,0))
+    screen.blit(text,(850,475))
+
+def contagem_entidades(entidades):
+    font = pygame.font.SysFont("Back to 1982",16)
+    text = font.render("Entidades:"+str(entidades),True,(0,0,0))
+    screen.blit(text,(850,550))
+
+def contagem_FabLabs(FabLabs):
+    font = pygame.font.SysFont("Back to 1982",20)
+    text = font.render("FabLabs:"+str(FabLabs),True,(0,0,0))
+    screen.blit(text,(850,625))
+
+'''def contagem_Inspers(Inspers):
+    font = pygame.font.SysFont("Back to 1982",20)
+    text = font.render("Inspers:"+str(Inspers),True,(0,0,0))
+    screen.blit(text,(850,700)
+'''
 def Save(count,Multi,MultiT1,inflacaolivro,inflacaocafe,inflacaoacai,inflacaocomp,inflacaoninja,inflacaocarro,inflacaoprof,inflacaoent,inflacaoFab,inflacaoInsper,livros,cafes,acais,comps,ninjas,carros,profs,entidades,FabLabs,Inspers):
     listData = [count,Multi,MultiT1,inflacaolivro,inflacaocafe,inflacaoacai,inflacaocomp,inflacaoninja,inflacaocarro,inflacaoprof,inflacaoent,inflacaoFab,inflacaoInsper,livros,cafes,acais,comps,ninjas,carros,profs,entidades,FabLabs,Inspers]
     outFile = open('DataSave.txt','wb')
@@ -182,76 +248,77 @@ Inspers = 0
 while not Crashed:
     screen.blit(Insper_background, [0, 0])
     screen.blit(aluno,[-40,197])
+
       
     #livro
     if count >= 200 * inflacaolivro:
-        livrobut = screen.blit(imagembotao,[600,0])
+        screen.blit(imagembotao1,[600,0])
         screen.blit(Fabulas,[620,15])
     elif count < 200 * inflacaolivro:
-        livrobut = screen.blit(botaosemdinheiro,[600,0])
+        screen.blit(botaosemdinheiro,[600,0])
         screen.blit(calculosemdinheiro,[620,15])
     #cafe
     if count >= 300 * inflacaocafe:
-        cafebut = screen.blit(imagembotao,[600,75]) 
+        screen.blit(imagembotao2,[600,75]) 
         screen.blit(Cafe,[620,80])  
     elif count < 300 * inflacaocafe:
-        cafebut = screen.blit(botaosemdinheiro,[600,75])
+        screen.blit(botaosemdinheiro,[600,75])
         screen.blit(cafesemdinheiro,[620,80])
     #acai
     if count >= 300 * inflacaoacai:
-        acaibut = screen.blit(imagembotao,[600,150]) 
+        screen.blit(imagembotao3,[600,150]) 
         screen.blit(imagemacai,[617,160])  
     elif count < 300 * inflacaoacai:
-        acaibut = screen.blit(botaosemdinheiro,[600,150])
+        screen.blit(botaosemdinheiro,[600,150])
         screen.blit(acaisemdinheiro,[617,160])
     #computador
     if count >= 300 * inflacaocomp:
-        compbut = screen.blit(imagembotao,[600,225]) 
+        screen.blit(imagembotao4,[600,225]) 
         screen.blit(imagemcomputer,[618,235])  
     elif count < 300 * inflacaocomp:
-        compbut = screen.blit(botaosemdinheiro,[600,225])
+        screen.blit(botaosemdinheiro,[600,225])
         screen.blit(computersemdinheiro,[618,235])
     #Ninja
     if count >= 300 * inflacaoninja:
-        ninjabut = screen.blit(imagembotao,[600,300])
+        screen.blit(imagembotao5,[600,300])
         screen.blit(imagemninja,[628,308])
     elif count < 300 * inflacaoninja:
-        ninjabut = screen.blit(botaosemdinheiro,[600,300])
+        screen.blit(botaosemdinheiro,[600,300])
         screen.blit(ninjasemdinheiro,[628,308])
     #Carro
     if count >= 300 * inflacaocarro:
-        carrobut = screen.blit(imagembotao,[600,375])
+        screen.blit(imagembotao6,[600,375])
         screen.blit(imagemcar,[615,400])
     elif count < 300 * inflacaocarro:
-        carrobut = screen.blit(botaosemdinheiro,[600,375])
+        screen.blit(botaosemdinheiro,[600,375])
         screen.blit(carsemdinheiro,[615,400])
     #Prof
     if count >= 300 * inflacaoprof:
-        profbut = screen.blit(imagembotao,[600,450])
+        screen.blit(imagembotao7,[600,450])
         screen.blit(imagemprofessor,[635,455])
     elif count < 300 * inflacaoprof:
-        profbut = screen.blit(botaosemdinheiro,[600,450])
+        screen.blit(botaosemdinheiro,[600,450])
         screen.blit(professorsemdinheiro,[635,455])
     #entidade
     if count >= 300 * inflacaoent:
-        entidadebut = screen.blit(imagembotao,[600,525])
+        screen.blit(imagembotao8,[600,525])
         screen.blit(imgaematletica,[622,532])
     elif count < 300 * inflacaoent:
-        entidadebut = screen.blit(botaosemdinheiro,[600,525])
+        screen.blit(botaosemdinheiro,[600,525])
         screen.blit(atleticasemdinheiro,[622,532])   
     #FabLab
     if count >= 300 * inflacaoFab:
-        fablabbut =  screen.blit(imagembotao,[600,600])
+        screen.blit(imagembotao9,[600,600])
         screen.blit(imagemfablab,[625,610])
     elif count < 300 * inflacaoFab:
-        fablabbut = screen.blit(botaosemdinheiro,[600,600])
+        screen.blit(botaosemdinheiro,[600,600])
         screen.blit(fablabsemdinheiro,[625,610])
     #Insper
     if count >= 300 * inflacaoInsper:
-        insperbut = screen.blit(imagembotao,[600,675])
+        screen.blit(imagembotao10,[600,675])
         screen.blit(imageminsper,[620,698])
     elif count < 300 * inflacaoInsper:
-        insperbut = screen.blit(botaosemdinheiro,[600,675])
+        screen.blit(botaosemdinheiro,[600,675])
         screen.blit(insperLogosemdinheiro,[620,698])
    
     
@@ -260,9 +327,15 @@ while not Crashed:
     dinheiro(count)
     contagem_cafes(cafes)
     contagem_livros(livros)
-    contagem_acai(acais)
-    
-    
+    contagem_acais(acais)
+    contagem_comps(comps)
+    contagem_ninjas(ninjas)
+    contagem_carros(carros)
+    contagem_profs(profs)
+    contagem_entidades(entidades)
+    contagem_FabLabs(FabLabs)
+    #contagem_Inspers(Inspers)
+
     for event in pygame.event.get():
         print(event)
         if event.type == KEYDOWN:
@@ -296,57 +369,57 @@ while not Crashed:
                 if 197+380 > Ymouse > 197:
                     aluno =  alunoR
                     screen.blit(aluno,[-40,197])
-            
+            #livro
             if 600+500 > Xmouse > 600:
                 if 0+75 > Ymouse > 0:
                     if count >= 200 * inflacaolivro:
-                        livrobut = imagembotaoapertado
-                        screen.blit(livrobut,[600,0])
-
+                        imagembotao1 = imagembotaoapertado1
+                        screen.blit(imagembotao1,[600,0])
+            #cafe
                 if 150 > Ymouse > 75:
                     if count >= 300 * inflacaocafe:
-                        cafebut = imagembotaoapertado
-                        screen.blit(cafebut,[600,75])
-
+                        imagembotao2 = imagembotaoapertado2 
+                        screen.blit(imagembotao2,[600,75])
+            #acai
                 if 225 > Ymouse > 150:
                     if count >= 300 * inflacaoacai:
-                        acaibut = imagembotaoapertado
-                        screen.blit(acaibut,[600,150])
-
+                        imagembotao3 = imagembotaoapertado3
+                        screen.blit(imagembotao3,[600,150])
+            #comutador
                 if 300 > Ymouse > 225:
                     if count >= 300 * inflacaocomp:
-                        compbut = imagembotaoapertado
-                        screen.blit(compbut,[600,225])
-                
+                        imagembotao4 = imagembotaoapertado4
+                        screen.blit(imagembotao4,[600,225])
+            #ninjas
                 if 375 > Ymouse > 300:
                     if count >= 300 * inflacaoninja:
-                        ninjabut = imagembotaoapertado
-                        screen.blit(ninjabut,[600,300])
-
+                        imagembotao5 = imagembotaoapertado5
+                        screen.blit(imagembotao5,[600,300])
+            #carro
                 if 450 > Ymouse > 375:
                     if count >= inflacaocarro:
-                        carrobut = imagembotaoapertado
-                        screen.blit(carrobut,[600,375])
-
+                        imagembotao6 = imagembotaoapertado6
+                        screen.blit(imagembotao6,[600,375])
+            #professor
                 if 525 > Ymouse > 450:
                     if count >= 300 * inflacaoprof:
-                        profbut = imagembotaoapertado
-                        screen.blit(profbut,[600,450])
-
+                        imagembotao7 = imagembotaoapertado7
+                        screen.blit(imagembotao7,[600,450])
+            #entidades
                 if 600 > Ymouse > 525:
                     if count >= 300 * inflacaoent:
-                        entidadebut = imagembotaoapertado
-                        screen.blit(entidadebut,[600,525])
-                    
+                        imagembotao8 = imagembotaoapertado8
+                        screen.blit(imagembotao8,[600,525])
+            #fablab
                 if 675 > Ymouse > 600:
                     if count >= 300 * inflacaoFab:
-                        fablabbut = imagembotaoapertado
-                        screen.blit(fablabbut,[600,600])
-                
+                        imagembotao9 = imagembotaoapertado9
+                        screen.blit(imagembotao9,[600,600])
+            #insper
                 if 825 > Ymouse > 675:
                     if count >= 300 * inflacaoInsper:
-                        insperbut = imagembotaoapertado
-                        screen.blit(insperbut,[600,675])
+                        imagembotao10 = imagembotaoapertado10
+                        screen.blit(imagembotao10,[600,675])
 
 
         elif event.type == MOUSEBUTTONUP:
@@ -358,8 +431,8 @@ while not Crashed:
             if 600+500 > Xmouse > 600:
                 if 0+75 > Ymouse > 0:
                     if count >= 200 * inflacaolivro:
-                        livrobut = imagembotao
-                        screen.blit(livrobut,[600,0])
+                        imagembotao1 = pygame.image.load("botao.png")
+                        screen.blit(imagembotao1,[600,0])
                         livros += 1
                         Multi += 2
                         count -= 200 * inflacaolivro
@@ -367,8 +440,8 @@ while not Crashed:
 
                 if 0+150 > Ymouse > 75:
                     if count >= 300 * inflacaocafe:
-                        cafebut = imagembotao
-                        screen.blit(cafebut,[600,75])
+                        imagembotao2 = pygame.image.load("botao.png")
+                        screen.blit(imagembotao2,[600,75])
                         cafes += 1
                         MultiT1 += 2
                         count -= 300 * inflacaocafe
@@ -376,50 +449,50 @@ while not Crashed:
 
                 if 0+225 > Ymouse > 150:
                     if count >= 300 * inflacaoacai:
-                        acaibut = imagembotao
-                        screen.blit(acaibut,[600,150])
+                        imagembotao3 = pygame.image.load("botao.png")
+                        screen.blit(imagembotao3,[600,150])
 
                 if 0+300 > Ymouse > 225:
                     if count >= 300 * inflacaocomp:
-                        compbut = imagembotao
-                        screen.blit(compbut,[600,225])
+                        imagembotao4 = pygame.image.load("botao.png")
+                        screen.blit(imagembotao4,[600,225])
                 
                 if 0+375 > Ymouse > 300:
                     if count >= 300 * inflacaoninja:
-                        ninjabut = imagembotao
-                        screen.blit(ninjabut,[600,300])
+                        imagembotao5 = pygame.image.load("botao.png")
+                        screen.blit(imagembotao5,[600,300])
 
                 if 0+450 > Ymouse > 375:
                     if count >= 300 * inflacaocarro:
-                        carrobut = imagembotao
-                        screen.blit(carrobut,[600,375])
+                        imagembotao6 = pygame.image.load("botao.png")
+                        screen.blit(imagembotao6,[600,375])
 
                 if 0+525 > Ymouse > 450:
                     if count >= 300 * inflacaoprof:
-                        profbut = imagembotao
-                        screen.blit(profbut,[600,450])
+                        imagembotao7 = pygame.image.load("botao.png")
+                        screen.blit(imagembotao7,[600,450])
 
                 if 0+600 > Ymouse > 525:
                     if count >= 300 * inflacaoent:
-                        entidadebut = imagembotao
-                        screen.blit(entidadebut,[600,525])
+                        imagembotao8 = pygame.image.load("botao.png")
+                        screen.blit(imagembotao8,[600,525])
                 
                 if 0+675 > Ymouse > 600:
                     if count >= 300 * inflacaoFab:
-                        fablabbut = imagembotao
-                        screen.blit(fablabbut,[600,600])
+                        imagembotao9 = pygame.image.load("botao.png")
+                        screen.blit(imagembotao9,[600,600])
                 
                 if 0+825 > Ymouse > 675:
                     if count >= 300 * inflacaoInsper:
-                        insperbut = imagembotao
-                        screen.blit(insperbut,[600,675])
+                        imagembotao10 = pygame.image.load("botao.png")
+                        screen.blit(imagembotao10,[600,675])
 
             
 
             #Botao Aluno
             if 30+195 > Xmouse > 30:
                 if 197+380 > Ymouse > 197:       
-                    count += 1*Multi
+                    count += 0.1 * Multi
                     
               
                         
